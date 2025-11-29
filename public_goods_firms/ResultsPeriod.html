@@ -2,9 +2,35 @@
 {{ block title }}Period results{{ endblock }}
 
 {{ block content }}
+    <p>Your payoff this period: <strong>{{ payoff|floatformat:2 }}</strong></p>
+    {% if autarkic %}
+        <p>You worked alone.</p>
+    {% else %}
+        <p>You worked in firm {{ firm_id }}. Effort to firm: {{ effort_to_firm }}. Effort kept: {{ effort_to_self }}.</p>
+    {% endif %}
 
-{{ formfields }}
-
-{{ next_button }}
-
+    <h4>Firms this period</h4>
+    <table class="table table-sm">
+        <thead>
+            <tr>
+                <th>Firm</th>
+                <th>Members</th>
+                <th>Total effort</th>
+                <th>Effort per member</th>
+                <th>Payoff per member</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for firm in firm_list %}
+                <tr>
+                    <td>{{ firm.firm_id }}</td>
+                    <td>{{ firm.size }}</td>
+                    <td>{{ firm.total_effort|floatformat:2 }}</td>
+                    <td>{{ firm.per_capita_effort|floatformat:2 }}</td>
+                    <td>{{ firm.per_capita_payoff|floatformat:2 }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {{ next_button }}
 {{ endblock }}

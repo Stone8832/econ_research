@@ -2,9 +2,26 @@
 {{ block title }}Instructions{{ endblock }}
 
 {{ block content }}
-
-{{ formfields }}
-
+    <p>
+        You will participate in {{ C.NUM_ROUNDS }} periods. In every period you are endowed with
+        {{ C.EFFORT_ENDOWMENT }} effort units. You may keep effort for yourself or contribute it to your
+        firm. Effort kept for yourself yields one point per unit. Effort contributed to your firm generates
+        points for every member of your firm, including you.
+    </p>
+    <p>
+        The session is configured for <strong>{{ player.subsession.formation_type|title }}</strong> firm formation
+        and <strong>{{ player.subsession.returns_type }}</strong> returns to scale. In exogenous sessions you are
+        assigned to firms automatically. In endogenous sessions you choose which firm to work for each period
+        (or you may work alone). Firms may have at most {{ C.MAX_FIRM_SIZE }} members.
+    </p>
+    <p>
+        Under <em>constant</em> returns, the marginal per-capita return (MPCR) depends on the number of members.
+        Under <em>increasing</em> returns, the firm production function is calibrated so that full effort matches the
+        constant-return MPCR but marginal returns grow with total effort.
+    </p>
+    <p>
+        Each period has up to 120 seconds for firm formation (endogenous only), 60 seconds to allocate effort,
+        and 30 seconds to review outcomes.
+    </p>
 {{ next_button }}
-
 {{ endblock }}

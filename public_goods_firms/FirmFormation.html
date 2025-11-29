@@ -2,9 +2,38 @@
 {{ block title }}Firm formation{{ endblock }}
 
 {{ block content }}
-
-{{ formfields }}
-
-{{ next_button }}
-
+    <p>Select the firm you wish to work for this period. Enter <strong>0</strong> to work alone. Each firm can host up to {{ max_firm_size }} members.</p>
+    {{ formfields }}
+    <hr>
+    <h4>Recent history</h4>
+    <p>The table below summarizes where each participant worked previously and the per-capita payoff they observed.</p>
+    <table class="table table-sm">
+        <thead>
+            <tr>
+                <th>Participant</th>
+                <th>Round</th>
+                <th>Firm</th>
+                <th>Effort to firm</th>
+                <th>Per-capita payoff</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for h in history %}
+                {% if h.rows %}
+                    {% for row in h.rows|slice:'-6:' %}
+                        <tr>
+                            {% if forloop.first %}
+                                <td rowspan="{{ h.rows|length }}">{{ h.player }}</td>
+                            {% endif %}
+                            <td>{{ row.round }}</td>
+                            <td>{{ row.firm }}</td>
+                            <td>{{ row.effort }}</td>
+                            <td>{{ row.per_capita_payoff }}</td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+    {{ next_button }}
 {{ endblock }}

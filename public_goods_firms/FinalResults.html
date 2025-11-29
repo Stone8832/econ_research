@@ -2,9 +2,6 @@
 {{ block title }}Final results{{ endblock }}
 
 {{ block content }}
-
-{{ formfields }}
-
-{{ next_button }}
-
+    <p>Total points earned: <strong>{{ total_points|floatformat:2 }}</strong></p>
+    <p>Estimated payment (including participation fee): <strong>{{ total_payment|floatformat:2 }}</strong></p>
 {{ endblock }}

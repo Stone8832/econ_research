@@ -2,9 +2,11 @@
 {{ block title }}Effort allocation{{ endblock }}
 
 {{ block content }}
-
-{{ formfields }}
-
-{{ next_button }}
-
+    {% if in_firm %}
+        <p>You are employed in firm {{ player.firm_id }} this period. Allocate your {{ endowment }} effort units between self and the firm.</p>
+        {{ formfields }}
+    {% else %}
+        <p>You are working alone this period. All {{ endowment }} effort units will be kept for yourself.</p>
+    {% endif %}
+    {{ next_button }}
 {{ endblock }}
